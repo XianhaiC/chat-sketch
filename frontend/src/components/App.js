@@ -1,7 +1,5 @@
 import React from 'react'
-import Authentication from '../../util/Authentication/Authentication'
-
-import './App.css'
+import Authentication from '../util/Authentication/Authentication'
 
 export default class App extends React.Component{
     constructor(props){
