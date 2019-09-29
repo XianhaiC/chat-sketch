@@ -85,20 +85,22 @@ router.post('/sketches', async (req, res) => {
 
 // params: sketch_id
 router.delete('/sketches', async (req, res) => {
-  let payload = verifyAndDecode(req.headers.authorization)
+  //let payload = verifyAndDecode(req.headers.authorization)
     /*const { role } = payload;
 
   if (role !== "broadcaster" || role !== "moderator") {
     res.json({ errors: ["Unauthorized action"] })
   }*/
 
-  await deleteSketch(req.query.sketch_id)
-  broadcastToAll({
+  let ret = await deleteSketch(req.query.sketch_id)
+    /*broadcastToAll({
     event: 'delete-sketch',
     sketch_id: req.query.sketch_id
   }, makeServerToken(channelId), channelId)
+  */
 
-  res.json({status: 'deleted'})
+  //res.json({status: 'deleted'})
+  res.json(ret);
 })
 
 function makeServerToken(channelId) {
@@ -135,16 +137,17 @@ const createSketchInChannel = async (channelId, userId, displayName, sketch) => 
   }
 }
 
-const deleteSketchFromChannel = async (sketchId) => {
+const deleteSketch = async (sketchId) => {
   var params = {
     Key: {
-      ":sketchId": sketchId
+      "sketch_id": sketchId
     },
     TableName: sketchesTable
   };
   try {
-    let data = dynamodb.deleteItem(params).promise()
+    let data = dynamodb.delete(params).promise()
     console.log(`Deleted sketch from channel sketch_id: ${sketchId}`)
+    return data;
   }
   catch(err) {
     console.log(err);
