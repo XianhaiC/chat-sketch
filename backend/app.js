@@ -7,6 +7,9 @@ const compression = require('compression')
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
 const app = express()
 const router = express.Router()
+const AWS = require('aws-sdk')
+const dynamodb = new AWS.DynamoDB.DocumentClient({region: 'us-west-2'})
+const sketchesTable = 'Sketches'
 
 app.set('view engine', 'pug')
 
@@ -26,26 +29,33 @@ router.use(awsServerlessExpressMiddleware.eventContext())
 // NOTE: tests can't find the views directory without this
 app.set('views', path.join(__dirname, 'views'))
 
-router.get('/', (req, res) => {
-  res.render('index', {
-    apiUrl: req.apiGateway ? `https://${req.apiGateway.event.headers.Host}/${req.apiGateway.event.requestContext.stage}` : 'http://localhost:3000'
-  })
+router.get('/sketches', async (req, res) => {
+  let sketches = await getSketchesByChannel(req.query.channel_id)
+  res.json(sketches)
 })
+
+const getSketchesByChannel = async (channelId) => {
+  var params = {
+    TableName: sketchesTable,
+    Key: {
+      "sketch_id": channelId
+    }
+ };
+  console.log("NUM");
+  console.log(params.Key.sketch_id);
+  console.log(channelId);
+  try {
+    let data = await dynamodb.get(params).promise();
+    console.log(data);
+    return data;
+  }
+  catch(err) {
+    console.log(err);
+  }
+}
 
 router.get('/sam', (req, res) => {
   res.sendFile(`${__dirname}/sam-logo.png`)
-})
-
-router.get('/users', (req, res) => {
-  res.json(users)
-})
-
-router.get('/users/:userId', (req, res) => {
-  const user = getUser(req.params.userId)
-
-  if (!user) return res.status(404).json({})
-
-  return res.json(user)
 })
 
 router.post('/users', (req, res) => {

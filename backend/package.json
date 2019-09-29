@@ -1,5 +1,5 @@
 {
-  "name": "aws-serverless-express-example",
+  "name": "serverless-backend",
   "version": "2.1.1",
   "description": "Example application for running a Node Express app on AWS Lambda using Amazon API Gateway.",
   "main": "lambda.js",
@@ -37,12 +37,13 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
+    "aws-sdk": "^2.538.0",
     "aws-serverless-express": "^3.3.3",
     "body-parser": "^1.17.1",
     "compression": "^1.6.2",
     "cors": "^2.8.3",
     "express": "^4.15.2",
+    "lodash": ">=4.17.13",
     "pug": "^2.0.0-rc.1"
-    "lodash": ">=4.17.13"
   }
 }
