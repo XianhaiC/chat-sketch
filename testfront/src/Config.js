@@ -1,8 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import App from "./components/TApp"
+import ConfigPage from "./components/ConfigPage"
 
 ReactDOM.render(
-  <App />,
+  <ConfigPage />,
   document.getElementById("root")
 )

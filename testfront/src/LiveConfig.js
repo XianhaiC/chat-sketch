@@ -1,8 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import App from "./components/TApp"
+import LiveConfigPage from "./components/LiveConfigPage"
 
 ReactDOM.render(
-  <App />,
+  <LiveConfigPage />,
   document.getElementById("root")
 )
