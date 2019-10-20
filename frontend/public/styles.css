@@ -1,10 +1,15 @@
 :root {
   --col-sub: #f3f3f3;
+  --col-sel: #dfdfdf;
 }
 
 * {
   padding: 0;
   margin: 0;
+}
+
+button:focus {
+  outline:0;
 }
 
 .toolbar {
@@ -15,13 +20,45 @@
   border-width: 0px 0px 1px 0px;
   border-style: solid;
   border-color: grey;
-  padding: 5px 0px 5px 0px;
 }
 
 .toolbar-item {
   border: 0;
+  padding: 8px 5px 5px 5px;
+  font-size: 14px;
   background: transparent;
-  margin: 0px 5px 0px 5px;
+}
+
+.toolbar-item:hover {
+  background-color: var(--col-sel);
+}
+
+.item-container {
+  display: flex;
+  flex-direction: row;
+}
+
+[type=radio] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+[type=radio] + div {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 5px;
+}
+
+[type=radio]:checked + div {
+  background-color: var(--col-sel);
+}
+
+.raido-button {
+  background-color: black;
 }
 
 .picker {
@@ -29,6 +66,7 @@
   height: 20px;
   border-radius: 10px;
   background-color: black;
+  margin-top: 4px;
 }
 
 .filler {

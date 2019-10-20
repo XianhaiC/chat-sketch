@@ -13,13 +13,25 @@ class Canvas extends React.Component {
       lazyRadius: 5,
       width: 318,
       height: 300,
+      penSelected: true,
       disabled: false
     }
 
+    this.handlePenSelect = this.handlePenSelect.bind(this);
+    this.handleEraserSelect = this.handleEraserSelect.bind(this);
     this.handleColorChange = this.handleColorChange.bind(this);
     this.handleRadiusChange = this.handleRadiusChange.bind(this);
     this.handleUndo = this.handleUndo.bind(this);
     this.handleClear = this.handleClear.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handlePenSelect() {
+    this.setState({ penSelected: true });
+  }
+
+  handleEraserSelect() {
+    this.setState({ penSelected: false });
   }
 
   handleColorChange(color) {
@@ -40,10 +52,16 @@ class Canvas extends React.Component {
     this.canvas.clear();
   }
 
+  handleSubmit() {
+    this.props.onSubmit(this.canvas.getSaveData());
+  }
+
   render = () => {
     return (
       <div className="canvas">
         <Toolbar
+          onPenSelect={this.handlePenSelect}
+          onEraserSelect={this.handleEraserSelect}
           onColorChange={this.handleColorChange}
           onRadiusChange={this.handleRadiusChange}
           onUndo={this.handleUndo}
@@ -52,8 +70,9 @@ class Canvas extends React.Component {
         <div className="canvas-wrapper">
           <CanvasDraw
             ref={el => this.canvas = el}
-            brushColor={this.state.color}
+            brushColor={this.state.penSelected? this.state.color : "white"}
             brushRadius={this.state.radius}
+            catenaryColor={"transparent"}
             lazyRadius={this.state.lazyRadius}
             canvasWidth={this.state.width}
             canvasHeight={this.state.height}
@@ -61,7 +80,7 @@ class Canvas extends React.Component {
             disabled={this.state.disabled}
           />
         </div>
-        <button className="submit">Send</button>
+        <button className="submit" onClick={this.handleSubmit} >Send</button>
       </div>
     );
   }

@@ -19,6 +19,8 @@ export default class App extends React.Component{
       channelId: null,
       displayName: null
     }
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   contextUpdate(context, delta){
@@ -98,21 +100,29 @@ export default class App extends React.Component{
     }
   }
 
+  //TODO: perform validation checks
+  // user has shared identity
+  // user is not banned
+  handleSubmit(sketch) {
+    const { channelId, userId, displayName } = this.state;
+    ebs.createSketch(channleId, userId, displayName, sketch);
+  }
+
   render(){
     if(this.state.finishedLoading && this.state.isVisible){
       return (
         <div className="App">
           <div className={this.state.theme === 'light' ? 'App-light' : 'App-dark'} >
-            <Canvas />
+            <Canvas onSubmit={this.handleSubmit} />
           </div>
         </div>
       )
-    }else{
+    } 
+    else{
       return (
         <div className="App">
         </div>
       )
     }
-
   }
 }
