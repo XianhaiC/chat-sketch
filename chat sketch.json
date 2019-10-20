@@ -136,7 +136,7 @@
     "installationCount": -42,
     "liveConfigUrl": "",
     "name": "chat sketch",
-    "panelHeight": 300,
+    "panelHeight": 500,
     "privacyPolicyUrl": "",
     "requestIdentityLink": false,
     "requiredBroadcasterAbilities": [],
@@ -147,7 +147,7 @@
     "summary": "",
     "supportEmail": "xianhaic@gmail.com",
     "vendorCode": "",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "viewerSummary": "",
     "viewerUrl": "https://localhost:8080/panel.html",
     "viewerUrls": {
@@ -156,7 +156,7 @@
     "views": {
       "panel": {
         "viewerUrl": "https://localhost:8080/panel.html",
-        "height": 300,
+        "height": 500,
         "canLinkExternalContent": false
       },
       "config": {

@@ -1,0 +1,55 @@
+:root {
+  --col-sub: #f3f3f3;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--col-sub);
+  border-width: 0px 0px 1px 0px;
+  border-style: solid;
+  border-color: grey;
+  padding: 5px 0px 5px 0px;
+}
+
+.toolbar-item {
+  border: 0;
+  background: transparent;
+  margin: 0px 5px 0px 5px;
+}
+
+.picker {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: black;
+}
+
+.filler {
+  flex: 1 1 0;
+}
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.canvas-wrapper {
+  align-self: center;
+}
+
+.submit {
+  border: 0;
+  background-color: var(--col-sub);
+  border-width: 1px 0px 1px 0px;
+  border-style: solid;
+  border-color: grey;
+  padding: 5px 0px 5px 0px;
+}

@@ -15,14 +15,12 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^1.0.1",
     "css-loader": "^0.28.11",
     "enzyme": "^3.4.1",
@@ -38,15 +36,23 @@
   },
   "dependencies": {
     "jsonwebtoken": "^8.3.0",
+    "rc-color-picker": "^1.2.6",
     "react": "^16.3.2",
+    "react-canvas-draw": "^1.0.2",
     "react-dom": "^16.3.2",
     "yarn": "^1.19.0"
   },
   "babel": {
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ],
     "presets": [
-      "env",
-      "react"
+      "@babel/preset-env",
+      "@babel/preset-react"
     ]
+  },
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0"
   },
   "jest": {
     "setupFiles": [

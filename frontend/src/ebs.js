@@ -22,7 +22,6 @@ class EBS {
     return await result.json();
   }
 
-    /*
   post(path, data={}) {
     return this.doRequest(path, 'POST',
       JSON.stringify(data)
@@ -37,15 +36,15 @@ class EBS {
     return this.doRequest(path, 'DELETE')
   }
 
-  async getStatus() {
+  getStatus = async () => {
     return this.get('status');
   }
 
-  async getSketches(channelId) {
+  getSketches = async (channelId) => {
     return this.get(`sketches?channel_id=${channelId}`);
   }
 
-  async createSketch (channelId, userId, displayName, sketch) {
+  createSketch = async (channelId, userId, displayName, sketch) => {
     return this.post(`sketches?channel_id=${channelId}`, {
       user_id: userId,
       display_name: displayName,
@@ -53,10 +52,9 @@ class EBS {
     });
   }
 
-  async deleteSketch(sketchId) {
+  deleteSketch = async (sketchId) => {
     return this.delete(`sketches?sketch_id=${sketchId}`);
   }
-  */
 }
 
 export default EBS;
