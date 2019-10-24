@@ -53,11 +53,19 @@ function verifyAndDecode (header) {
   throw Boom.unauthorized(STRINGS.invalidAuthHeader);
 }
 
+//test
+router.get('/', (req, res) => {
+ res.json({ message: 'Express API Powered by AWS Lambda!' })
+})
+
 // params: channel_id
 router.get('/sketches', async (req, res) => {
+  /*
   //let payload = verifyAndDecode(req.headers.authorization)
   let sketches = await getSketchesByChannel(req.query.channel_id)
   res.json(sketches)
+  */
+ res.json({ message: 'GETSKETCHS API Powered by AWS Lambda!' })
 })
 
 // params: channel_id
