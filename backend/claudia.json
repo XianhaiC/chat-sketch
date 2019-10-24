@@ -1,0 +1,10 @@
+{
+  "lambda": {
+    "role": "chat-sketch-api-executor",
+    "name": "chat-sketch-api",
+    "region": "us-west-2"
+  },
+  "api": {
+    "id": "btnpy71eef"
+  }
+}
