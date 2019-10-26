@@ -11,7 +11,6 @@ export default class EBS {
     this.token = token;
   }
 
-    /*
   doRequest = async (path, method, body={}) => {
     const result = await fetch(this.baseUrl + path, {
       method: method,
@@ -58,5 +57,4 @@ export default class EBS {
   deleteSketch = async (sketchId) => {
     return this.delete(`sketches?sketch_id=${sketchId}`);
   }
-  */
 }
