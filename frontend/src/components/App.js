@@ -1,8 +1,8 @@
 import React from 'react'
 import Authentication from '../util/Authentication/Authentication'
+import EBS from '../ebs'
+import Canvas from './Canvas'
 
-import EBS from '../ebs';
-import Canvas from './Canvas';
 
 export default class App extends React.Component{
   constructor(props){
@@ -11,12 +11,12 @@ export default class App extends React.Component{
 
     //if the extension is running on twitch or dev rig, set the shorthand here. otherwise, set to null. 
     this.twitch = window.Twitch ? window.Twitch.ext : null
+    this.ebs = new EBS();
+    window.Twitch.ext.rig.log("EBS");
     this.state={
       finishedLoading:false,
       theme:'light',
       isVisible:true,
-      userId: null,
-      channelId: null,
       displayName: null
     }
 
@@ -42,27 +42,13 @@ export default class App extends React.Component{
   componentDidMount(){
     if(this.twitch){
       this.twitch.onAuthorized((auth)=>{
+        window.Twitch.ext.rig.log(auth);
         this.Authentication.setToken(auth.token, auth.userId)
-        if(!this.state.finishedLoading){
-          // if the component hasn't finished loading (as in we've not set up after getting a token), let's set it up now.
+        window.Twitch.ext.rig.log("AFTER");
+        this.ebs.setToken(auth.token);
 
-          // now we've done the setup for the component, let's set the state to true to force a rerender with the correct data.
-          this.setState(()=>{
-            return {finishedLoading:true}
-          }) }
-        ebs.setToken(auth.token);
 
-        const authedUser = twitch.viewer;
-        console.log("TWITCH");
-        console.log(twitch);
-
-        const channelId = auth.channelId;
-
-        if (!authedUser.isLinked) {
-          this.setState({ channelId });
-          return;
-        }
-
+          /*
         fetch(`https://api.twitch.tv/helix/users?id=${authedUser.id}`, {headers})
           .then((res) => res.json())
           .then((res) => {
@@ -74,6 +60,17 @@ export default class App extends React.Component{
             this.setState({ channelId, userId, displayName });
           })
           .catch((err) => console.error('Encountered error', err));
+          */
+
+        window.Twitch.ext.rig.log("AFTER");
+        if(!this.state.finishedLoading) {
+          // if the component hasn't finished loading (as in we've not set up after getting a token), let's set it up now.
+
+          // now we've done the setup for the component, let's set the state to true to force a rerender with the correct data.
+          this.setState(()=>{
+            return {finishedLoading:true}
+          })
+        }
       })
 
       this.twitch.listen('broadcast',(target,contentType,body)=>{
@@ -105,6 +102,10 @@ export default class App extends React.Component{
   // user is not banned
   handleSubmit(sketch) {
     const { channelId, userId, displayName } = this.state;
+    window.Twitch.ext.rig.log("CREATING WITH");
+    window.Twitch.ext.rig.log(channelId);
+    window.Twitch.ext.rig.log(userId);
+    window.Twitch.ext.rig.log(displayName);
     ebs.createSketch(channleId, userId, displayName, sketch);
   }
 

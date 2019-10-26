@@ -1,15 +1,18 @@
-class EBS {
+export default class EBS {
   constructor() {
+    window.Twitch.ext.rig.log("CONSTRUT 2");
     // Change this to a deployed production url before uploading this to Twitch
     this.baseUrl = 'https://localhost:3000/' // make sure the port is set accordingly
     this.token = null;
   }
 
   setToken(token) {
+    window.Twitch.ext.rig.log("SETTING TOKEN");
     this.token = token;
   }
 
-  doRequest = async (path, method, body = {}) => {
+    /*
+  doRequest = async (path, method, body={}) => {
     const result = await fetch(this.baseUrl + path, {
       method: method,
       body: body,
@@ -18,8 +21,8 @@ class EBS {
         'Authorization': 'Bearer ' + this.token,
         'content-type': 'application/json'
       }
-    });
-    return await result.json();
+    })
+    return result.json();
   }
 
   post(path, data={}) {
@@ -28,7 +31,7 @@ class EBS {
     )
   }
 
-  get (path) {
+  get(path) {
     return this.doRequest(path, 'GET')
   }
 
@@ -55,6 +58,5 @@ class EBS {
   deleteSketch = async (sketchId) => {
     return this.delete(`sketches?sketch_id=${sketchId}`);
   }
+  */
 }
-
-export default EBS;
