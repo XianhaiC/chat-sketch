@@ -13,7 +13,7 @@ export default class Authentication{
       user_id: false,
       channel_id: false,
       isMod: false,
-      displayName: null,
+      display_name: null,
       role: ""
     }
   }
@@ -46,12 +46,21 @@ export default class Authentication{
     return this.state.channel_id
   }
 
+  setDisplayName(display_name) {
+    this.state.display_name = display_name;    
+  }
+
+  getDisplayName() {
+    return this.state.displayName;
+  }
+
   // set the token in the Authentication componenent state
   // this is naive, and will work with whatever token is returned. under no circumstances should you use this logic to trust private data- you should always verify the token on the backend before displaying that data. 
   setToken(token,opaque_id){
     let isMod = false
     let role = ""
     let user_id = ""
+    let channel_id = ""
 
     try {
       let decoded = jwt.decode(token)
@@ -63,6 +72,9 @@ export default class Authentication{
         isMod = true
       }
 
+      // TODO can be revoked at anytime so we must detect this
+      // and prevent the user from using the extension until they
+      // link their account again
       user_id = decoded.user_id
       role = decoded.role
       channel_id = decoded.channel_id
@@ -76,7 +88,8 @@ export default class Authentication{
       opaque_id,
       isMod,
       user_id,
-      role
+      role,
+      channel_id
     }
   }
 

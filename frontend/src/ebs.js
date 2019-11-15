@@ -2,7 +2,7 @@ export default class EBS {
   constructor() {
     window.Twitch.ext.rig.log("CONSTRUT 2");
     // Change this to a deployed production url before uploading this to Twitch
-    this.baseUrl = 'https://localhost:3000/' // make sure the port is set accordingly
+    this.baseUrl = 'http://localhost:3000/' // make sure the port is set accordingly
     this.token = null;
   }
 
@@ -12,6 +12,10 @@ export default class EBS {
   }
 
   doRequest = async (path, method, body={}) => {
+    console.log("FETCHING");
+    console.log(path);
+    console.log(method);
+    console.log(body);
     const result = await fetch(this.baseUrl + path, {
       method: method,
       body: body,

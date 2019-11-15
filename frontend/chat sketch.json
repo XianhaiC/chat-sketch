@@ -39,6 +39,52 @@
         "width": 1280,
         "height": 720
       }
+    },
+    {
+      "id": "2",
+      "label": "Viewer shared id",
+      "channelId": "188401350",
+      "configurationAnchor": "panel",
+      "displayChannelName": "chocolatecakekid",
+      "type": "panel",
+      "features": {
+        "isBitsEnabled": false,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": true
+      },
+      "linked": true,
+      "linkedUserId": "265737932",
+      "mode": "viewer",
+      "isPopout": true,
+      "role": "Logged-In Viewer",
+      "orientation": "Portrait",
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      }
+    },
+    {
+      "id": "3",
+      "label": "Viewer no shared id",
+      "channelId": "188401350",
+      "configurationAnchor": "panel",
+      "displayChannelName": "chocolatecakekid",
+      "type": "panel",
+      "features": {
+        "isBitsEnabled": false,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": true
+      },
+      "linked": false,
+      "linkedUserId": "",
+      "mode": "viewer",
+      "isPopout": true,
+      "role": "Logged-In Viewer",
+      "orientation": "Portrait",
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      }
     }
   ],
   "manifest": {

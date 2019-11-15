@@ -42,25 +42,36 @@ export default class App extends React.Component{
   componentDidMount(){
     if(this.twitch){
       this.twitch.onAuthorized((auth)=>{
-        window.Twitch.ext.rig.log(auth);
+        // initialize user details
+        // includes channelId, userId(if linked), etc.
         this.Authentication.setToken(auth.token, auth.userId)
-        window.Twitch.ext.rig.log("AFTER");
         this.ebs.setToken(auth.token);
 
+        // after, if the user hasn't shared their ID, we can't
+        // let them use the extension
+        // TODO: show different view if user does not share ID, for
+        // now assume they do
+        console.log("ID");
+        console.log(this.Authentication.getChannelId());
 
-          /*
-        fetch(`https://api.twitch.tv/helix/users?id=${authedUser.id}`, {headers})
+        const headers = {
+          'Authorization': 'Bearer ' + this.token,
+          'content-type': 'application/json'
+        }
+
+        // retrieve screen name
+        fetch(`https://api.twitch.tv/helix/users?id=${this.Authentication.getUserId()}`, {
+          headers: {
+            'content-type': 'application/json'
+          }
+        })
           .then((res) => res.json())
           .then((res) => {
             const [user] = res.data;
-            const userId = user.id;
-            const displayName = user.display_name;
-
+            this.Authentication.setDisplayName(user.display_name);
             twitch.rig.log(user);
-            this.setState({ channelId, userId, displayName });
           })
           .catch((err) => console.error('Encountered error', err));
-          */
 
         window.Twitch.ext.rig.log("AFTER");
         if(!this.state.finishedLoading) {
@@ -101,12 +112,14 @@ export default class App extends React.Component{
   // user has shared identity
   // user is not banned
   handleSubmit(sketch) {
-    const { channelId, userId, displayName } = this.state;
+    const channelId = this.Authentication.getChannelId();
+    const userId = this.Authentication.getUserId();
+    const displayName = this.Authentication.getDisplayName();
     window.Twitch.ext.rig.log("CREATING WITH");
     window.Twitch.ext.rig.log(channelId);
     window.Twitch.ext.rig.log(userId);
     window.Twitch.ext.rig.log(displayName);
-    ebs.createSketch(channleId, userId, displayName, sketch);
+    this.ebs.createSketch(channelId, userId, displayName, sketch);
   }
 
   render(){
